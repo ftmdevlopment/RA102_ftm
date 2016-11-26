@@ -1,0 +1,2 @@
+
+void pkill(const char*);
