@@ -8,7 +8,7 @@
 #include <string.h>
 #include "console.h"
 //#include "bluetooth.h"
-#include "bluedroidtest.c"
+//#include "bluedroidtest.c"
 #include "board_test.h"
 #include <linux/videodev2.h>
 //#include <linux/videodev2_samsung.h>
@@ -23,11 +23,11 @@
 #include <errno.h>
 #include <string.h>
 
-#include "cutils/sockets.h"
+//#include "cutils/sockets.h"
 
-#include <hardware/audio.h>
-#include <system/audio.h>
-#include <tinyalsa/asoundlib.h>
+//#include <hardware/audio.h>
+//#include <system/audio.h>
+//#include <tinyalsa/asoundlib.h>
 
 #ifndef pr_info
 #define pr_info(fmt, args...)  printf("[board_test]: "fmt, ##args)
@@ -601,6 +601,7 @@ int32_t write_to_interface(int32_t fd, char* buffer, int32_t buf_len)
     return write_len;
 }
 
+#if 0
 int AT_Command_SNRead(void){
 	/**************************
 	only test code now
@@ -643,6 +644,7 @@ int AT_Command_SNRead(void){
 
     return ret;
 }
+#endif
 
 int AT_Command_SNWrite(void){
 	return 0;
@@ -689,6 +691,7 @@ int gas_gauge_test(void)
 	return 0;
 }
 
+#if 0
 static struct pcm_config config = {
     .channels = 2,
     .rate = 48000,
@@ -790,6 +793,7 @@ err_sco_out:
 
     return -1;
 }
+#endif
 
 int handle_rtc_test(void)
 {
@@ -874,6 +878,7 @@ int rearcamera_test(void)
 	return OK;
 }
 
+#if 0
 /* bluetooth test function  */
 static int bt_test(void)
 {
@@ -956,6 +961,7 @@ static int bt_write_addr(void)
 	do_writemac("22:22:ac:02:ba:63");
 	return OK;
 }
+#endif
 
 static int wifi_test(void)
 {
@@ -1279,7 +1285,7 @@ int secureboot_test (void)
 int base_power_set(void)
 {
 	int ret = -1;
-	ret = bt_close();
+	ret = 0; // bt_close();
 	if (ret < 0)
 	{
 		printf("close bt failed\n");
@@ -1354,9 +1360,9 @@ struct test_list works[] =
 //	{"SIM:", NULL,"TAT02", NULL},
 //	{"SN:", NULL, "TAT03", NULL},
 	{"Audio:", audio_test, "TAT05", NULL},
-	{"Bluetooth:", bt_test, "TAT07", NULL},
+//	{"Bluetooth:", bt_test, "TAT07", NULL},
 	{"WIFI:", wifi_test, "TAT06", NULL},
-	{"Bluetooth ID:", bt_test_id, "TAT97", NULL},
+//	{"Bluetooth ID:", bt_test_id, "TAT97", NULL},
 	{"WIFI ID:", wifi_test_id, "TAT96", NULL},
 	{"GSensor:", gsensor_test, "TAT09", NULL},
 	{"MSensor:", msensor_test, "TAT10", NULL},
@@ -1381,17 +1387,17 @@ struct test_list works[] =
 	{"NFC:", NULL, "TNFC", NULL},
 	//=-----current test
 	{"BASE POWER:", base_power_set, "TAT40", NULL},
-	{"Open BT:", bt_open, "TAT41", NULL},
-	{"CLOSE BT:", bt_close, "TAT42", NULL},
+//	{"Open BT:", bt_open, "TAT41", NULL},
+//	{"CLOSE BT:", bt_close, "TAT42", NULL},
 	{"OPEN WIFI:", wifi_open, "TAT45", NULL},
 	{"CLOSE WIFI:", wifi_close, "TAT46", NULL},
-	{"OPEN SPK:", audio_playback_spk, "TAT47", NULL},
-	{"CLOSE SPK:", audio_stop_playback_spk, "TAT48", NULL},
+//	{"OPEN SPK:", audio_playback_spk, "TAT47", NULL},
+//	{"CLOSE SPK:", audio_stop_playback_spk, "TAT48", NULL},
         {"OPEN GPS:", gps_test_open, "TAT49", NULL},
         {"CLOSE GPS:", gps_test_close, "TAT50", NULL},
 
       //modem
-	{"SN Read:", AT_Command_SNRead, "TAT03", NULL},
+//	{"SN Read:", AT_Command_SNRead, "TAT03", NULL},
 	{"SN Write:", AT_Command_SNWrite, "WSN", NULL},
 	{"Read group SN:", AT_Command_GSNRead, "RGSN", NULL},
 	{"Write Group SN:", AT_Command_GSNWrite, "WGSN", NULL},
@@ -1400,8 +1406,8 @@ struct test_list works[] =
 	//--------------wifi/bt addr
 	{"Read Wifi Addr:", wifi_read_addr, "RWIFIADDR", NULL},
 	{"Write Wifi Addr:", wifi_write_addr, "WWIFIADDR", NULL},
-	{"Read BT Addr:", bt_read_addr, "RBTADDR", NULL},
-	{"Write BT Addr:", bt_write_addr, "WBTADDR", NULL},
+//	{"Read BT Addr:", bt_read_addr, "RBTADDR", NULL},
+//	{"Write BT Addr:", bt_write_addr, "WBTADDR", NULL},
 	//test flow
 	{"Set Flag:", NULL, "SFG", NULL},
 	{"Get Flag:", NULL, "GFG", NULL},
